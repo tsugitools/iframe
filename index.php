@@ -28,7 +28,7 @@ $grade = Settings::linkGet('grade', false);
 
 // Students are just redireced
 if ( ! $USER->instructor && $url ) {
-    if ( $grade && $RESULT->id ) {
+    if ( $grade && $RESULT->id && $RESULT->grade < 1.0 ) {
         $RESULT->gradeSend(1.0, false);
     }
     header("Location: ".U::safe_href($url));
