@@ -24,9 +24,13 @@ $url = Settings::linkGet('url', false);
 if ( ! $url ) $url = isset($_GET['url']) ? $_GET['url'] : false;
 if ( ! $url ) $url = isset($_SESSION['url']) ? $_SESSION['url'] : false;
 if ( $url ) $_SESSION['url'] = $url;
+$grade = Settings::linkGet('grade', false);
 
 // Students are just redireced
 if ( ! $USER->instructor && $url ) {
+    if ( $grade && $RESULT->id ) {
+        $RESULT->gradeSend(1.0, false);
+    }
     header("Location: ".U::safe_href($url));
     return;
 }
@@ -48,6 +52,7 @@ if ( $LTI->user && $LTI->user->instructor ) {
     echo("</p>");
     SettingsForm::start();
     SettingsForm::text('url','Please enter the URL.');
+    SettingsForm::checkbox('grade','Give the student a grade when they launches this url.');
     SettingsForm::end();
     
     $OUTPUT->flashMessages();
@@ -60,6 +65,7 @@ if ( ! $url ) {
     echo("</div>\n");
     echo('<iframe src="'.U::safe_href($url));
     echo('" style="width:100%; height:600px;" frameborder="0" allowfullscreen></iframe>'."\n");
+
 }
 $OUTPUT->footerStart();
 $OUTPUT->footerEnd();
