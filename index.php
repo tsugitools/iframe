@@ -26,7 +26,7 @@ if ( ! $url ) $url = isset($_SESSION['url']) ? $_SESSION['url'] : false;
 if ( $url ) $_SESSION['url'] = $url;
 $grade = Settings::linkGet('grade', false);
 
-// Students are just redireced
+// Students are just redirected
 if ( ! $USER->instructor && $url ) {
     if ( $grade && $RESULT->id && $RESULT->grade < 1.0 ) {
         $RESULT->gradeSend(1.0, false);
