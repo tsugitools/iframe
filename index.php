@@ -59,7 +59,7 @@ if ( $LTI->user && $LTI->user->instructor ) {
 }
 
 if ( ! $url ) {
-    echo("<p>IFrame url has not yet been configured</p>\n");
+    echo("<p>iFrame url has not yet been configured</p>\n");
     echo("</div>\n");
 } else {
     echo("</div>\n");
