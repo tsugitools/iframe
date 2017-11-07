@@ -53,6 +53,9 @@ if ( $LTI->user && $LTI->user->instructor ) {
     SettingsForm::start();
     SettingsForm::text('url','Please enter the URL.');
     SettingsForm::checkbox('grade','Give the student a grade when they launches this url.');
+    echo("<p>");
+    echo(__("If you are entering a YouTube URL, make sure that is an 'embeddable' URL."));
+    echo("</p>");
     SettingsForm::end();
     
     $OUTPUT->flashMessages();
