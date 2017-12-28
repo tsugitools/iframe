@@ -18,8 +18,8 @@ launched.",
         "internal"
     ),
     "source_url" => "https://github.com/tsugitools/iframe",
+    // For now Tsugi tools delegate this to /lti/store
     "placements" => array(
-        "course_navigation", "homework_submission"
         /*
         "course_navigation", "homework_submission",
         "course_home_submission", "editor_button",
