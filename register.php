@@ -8,6 +8,7 @@ $REGISTER_LTI2 = array(
 you to view analytics about the use of the web page from your course.
 You can also trigger a grade to be sent to the learning system when the tool is
 launched.",
+    "messages" => array("launch", "launch_grade"),
  "privacy_level" => "anonymous",  // anonymous, name_only, public
     "license" => "Apache",
     "languages" => array(
