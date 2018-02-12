@@ -10,8 +10,7 @@ use \Tsugi\Core\LTIX;
 use \Tsugi\Core\Settings;
 use \Tsugi\UI\SettingsForm;
 
-// Allow this to just be launched as a naked URL w/o LTI
-$LTI = LTIX::session_start();
+$LTI = LTIX::requireData();
 
 // Handle the incoming post first
 if ( $LTI->link && $LTI->link->id && SettingsForm::handleSettingsPost() ) {
@@ -28,7 +27,7 @@ $grade = Settings::linkGet('grade', false);
 
 // Students are just redirected
 if ( ! $USER->instructor && $url ) {
-    if ( $grade && $RESULT->id && $RESULT->grade < 1.0 ) {
+    if ( $grade && $RESULT && $RESULT->id && $RESULT->grade < 1.0 ) {
         $RESULT->gradeSend(1.0, false);
     }
     header("Location: ".U::safe_href($url));
