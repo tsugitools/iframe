@@ -14,7 +14,7 @@ use \Tsugi\UI\SettingsForm;
 $LTI = LTIX::session_start();
 
 // Handle the incoming post first
-if ( $LINK->id && SettingsForm::handleSettingsPost() ) {
+if ( $LTI->link && $LTI->link->id && SettingsForm::handleSettingsPost() ) {
     header('Location: '.addSession('index.php') ) ;
     return;
 }
@@ -43,7 +43,7 @@ $OUTPUT->topNav();
 <div class="container">
 <?php
 
-if ( $LTI->user && $LTI->user->instructor ) {
+if ( $LTI->link && $LTI->user && $LTI->user->instructor ) {
     echo "<p style='text-align:right;'>";
     if ( $CFG->launchactivity ) {
         echo('<a href="analytics" class="btn btn-default">Launches</a> ');
