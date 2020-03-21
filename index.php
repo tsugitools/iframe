@@ -34,21 +34,22 @@ if ( ! $USER->instructor && $url ) {
     return;
 }
 
+$menu = false;
+if ( $LTI->link && $LTI->user && $LTI->user->instructor ) {
+    $menu = new \Tsugi\UI\MenuSet();
+    if ( $CFG->launchactivity ) {
+        $menu->addRight(__('Launches'), 'analytics');
+    }
+    $menu->addRight(__('Settings'), '#', /* push */ false, SettingsForm::attr());
+}
 // Render view
 $OUTPUT->header();
 $OUTPUT->bodyStart();
-$OUTPUT->topNav();
+$OUTPUT->topNav($menu);
 ?>
-<div class="container">
 <?php
 
 if ( $LTI->link && $LTI->user && $LTI->user->instructor ) {
-    echo "<p style='text-align:right;'>";
-    if ( $CFG->launchactivity ) {
-        echo('<a href="analytics" class="btn btn-default">Launches</a> ');
-    }
-    SettingsForm::button(false);
-    echo("</p>");
     SettingsForm::start();
     SettingsForm::text('url','Please enter the URL.');
     SettingsForm::checkbox('grade','Give the student a grade when they launch this url.');
@@ -62,7 +63,6 @@ if ( $LTI->link && $LTI->user && $LTI->user->instructor ) {
 
 if ( ! $url ) {
     echo("<p>iFrame url has not yet been configured</p>\n");
-    echo("</div>\n");
 } else {
     echo("</div>\n");
     echo('<iframe src="'.U::safe_href($url));
